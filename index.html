@@ -456,7 +456,12 @@
   .status.ok { color: var(--ok); }
   .status.err { color: var(--error); }
 
-  .result-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; min-height: 90px; overflow: auto; }
+  .result-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; min-height: 90px; max-height: min(460px, 62vh); overflow: auto; scrollbar-width: auto; scrollbar-color: var(--teal) #EDE9DE; }
+  .result-panel::-webkit-scrollbar { height: 14px; width: 14px; }
+  .result-panel::-webkit-scrollbar-track { background: #EDE9DE; }
+  .result-panel::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 8px; border: 3px solid #EDE9DE; }
+  table.result tbody td:first-child { position: sticky; left: 0; background: #FBF9F3; box-shadow: 1px 0 0 var(--line); }
+  table.result thead th:first-child { left: 0; z-index: 3; }
   .result-panel.empty { display: flex; align-items: center; justify-content: center; color: var(--ink-soft); font-size: 13px; padding: 30px 20px; text-align: center; }
   .error-box { margin: 18px; padding: 14px 16px; background: #FBEAE9; border: 1px solid #EFC3C0; border-radius: 8px; color: #8A2E29; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; white-space: pre-wrap; }
   .error-box.friendly { font-family: 'Inter', sans-serif; }
@@ -527,15 +532,49 @@
     border-color: var(--gold);
     color: var(--gold);
   }
+
+  #join-tools { background:#FBF8F0; border:1px solid var(--line); border-left:4px solid var(--gold); border-radius:10px; padding:14px 16px; margin:0 0 18px; }
+  #join-tools h3 { margin:0 0 4px; font-size:14px; color:var(--navy); }
+  #join-tools p { margin:0 0 10px; font-size:12px; color:var(--ink-soft); line-height:1.5; }
+  #join-scripts-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; }
+  .join-btn { text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; padding:9px 11px; cursor:pointer; font:inherit; color:var(--navy); }
+  .join-btn:hover { border-color:var(--teal); background:#F1F7F8; }
+  .join-btn .jt { display:block; font-weight:600; font-size:13px; font-family:'JetBrains Mono',monospace; }
+  .join-btn .jd { display:block; font-size:11.5px; color:var(--ink-soft); margin-top:2px; line-height:1.4; }
+  .join-btn .jc { display:block; font-size:10.5px; color:var(--teal); font-weight:600; margin-top:3px; }
+  .join-btn.done { background:#EEF6F0; border-color:#B9D8C2; }
+  .join-btn.done .jc { color:#2F7D4A; }
+  .editor-wrap.flash { animation: flashgold 1.2s ease; }
+  @keyframes flashgold { 0%{box-shadow:0 0 0 4px var(--gold);} 100%{box-shadow:0 8px 24px rgba(30,42,58,0.18);} }
+
+  .tour-btn { background:var(--gold); color:var(--navy-deep); border:none; border-radius:999px; padding:6px 14px; font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .tour-btn:hover { filter:brightness(1.06); }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  #tour-spot { position:fixed; z-index:9000; border-radius:10px; pointer-events:none; box-shadow:0 0 0 9999px rgba(20,28,40,0.62), 0 0 0 3px var(--gold); transition:all .28s ease; }
+  #tour-hand { position:fixed; z-index:9002; font-size:38px; line-height:1; pointer-events:none; transition:all .28s ease; filter:drop-shadow(0 3px 4px rgba(0,0,0,.45)); animation:tourbob 0.9s ease-in-out infinite; }
+  @keyframes tourbob { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-9px);} }
+  #tour-card { position:fixed; z-index:9003; width:min(340px, calc(100vw - 24px)); background:#fff; border-radius:12px; padding:14px 16px 12px; box-shadow:0 12px 36px rgba(0,0,0,.35); border-top:4px solid var(--gold); transition:all .28s ease; }
+  #tour-card .tc-step { font-size:11px; font-weight:700; color:var(--teal); letter-spacing:.04em; text-transform:uppercase; }
+  #tour-card .tc-title { font-family:'Fraunces',serif; font-size:16.5px; color:var(--navy); margin:2px 0 6px; }
+  #tour-card .tc-text { font-size:13px; line-height:1.5; color:var(--ink); margin:0 0 10px; }
+  #tour-card .tc-act { display:inline-block; background:#FFF6DF; border:1px dashed var(--gold); border-radius:6px; padding:4px 8px; font-size:12px; font-weight:600; color:#7A5A12; margin-bottom:10px; }
+  #tour-card .tc-row { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  #tour-card .tc-skip { background:none; border:none; color:var(--ink-soft); font:inherit; font-size:12px; cursor:pointer; text-decoration:underline; padding:0; }
+  #tour-card .tc-next { background:var(--navy); color:#fff; border:none; border-radius:8px; padding:7px 14px; font:inherit; font-size:13px; font-weight:600; cursor:pointer; }
+  #tour-card .tc-next:hover { background:var(--navy-deep); }
+  #tour-dots { display:flex; gap:4px; margin-bottom:8px; }
+  #tour-dots i { width:7px; height:7px; border-radius:50%; background:#DDD8CA; }
+  #tour-dots i.on { background:var(--gold); }
 </style>
 </head>
 <body>
 
   <div class="topbar">
     <div><span class="mark">AMZ - SQL Practitioner Lab</span><span class="sub">by Ing. Erick J. Pineda Amézquita</span></div>
+    <button class="tour-btn" id="btn-tour" title="Recorrido paso a paso por la herramienta">👆 Guía interactiva</button>
   </div>
 
-  <div class="toolbar">
+  <div class="toolbar" id="case-bar">
     <div class="grp">
       <span class="toolbar-label">Cargar caso:</span>
       <button class="chip-btn primary" id="btn-load-envios" title="Empresa de logística y entregas. Envíos conectados con sus agentes de servicio y clientes.">TransLogic GT</button>
@@ -555,6 +594,7 @@
       <strong>3)</strong> andá a la pestaña "Datos" y probá una pregunta con un clic ·
       <strong>4)</strong> cuando te animes, creá tu propia tabla con las plantillas.
     </div>
+    <button class="tour-btn" id="btn-tour-2" style="margin-left:auto;margin-right:8px;">▶ Empezar guía</button>
     <button class="onboarding-close" id="onboarding-close" aria-label="Cerrar guía">✕</button>
   </div>
 
@@ -574,6 +614,11 @@
           <button class="chip-btn" id="btn-tpl-two">+ Ejemplo: 2 tablas relacionadas</button>
           <button class="chip-btn" id="btn-tpl-list">Ver tablas actuales</button>
         </div>
+      </div>
+      <div id="join-tools" style="display:none;">
+        <h3>🔗 Tablas extra para practicar JOIN</h3>
+        <p>Elegí una: el script se escribe en la consola negra (no se ejecuta solo). Leelo, presioná <strong>Ejecutar</strong> y mirá cómo aparece la tabla nueva y su relación en el diagrama.</p>
+        <div id="join-scripts-list"></div>
       </div>
       <div class="section-divider" style="margin-top:0;"></div>
       <h2>Diagrama ER en vivo</h2>
@@ -1494,7 +1539,42 @@ document.getElementById("btn-view-table").addEventListener("click", () => {
   runQuery();
 });
 
+const JOIN_SCRIPTS = {"envios": [{"table": "campanas", "title": "campanas", "desc": "Canal y presupuesto de cada campaña → JOIN con envios", "sql": "-- ============================================================\n-- PASO A PASO: crear la tabla \"campanas\" y conectarla con \"envios\"\n-- Catálogo de campañas de mercadeo de TransLogic GT.\n-- Presioná Ejecutar y mirá cómo aparece en el Diagrama ER.\n-- ============================================================\n\n-- 1) Crear la tabla nueva (la \"dimensión\")\nCREATE TABLE campanas (\n    id_campana         INTEGER PRIMARY KEY,\n    nombre_campana     VARCHAR(30) NOT NULL,\n    tipo_canal         VARCHAR(20) NOT NULL,\n    presupuesto_mensual DECIMAL(10,2)\n);\n\n-- 2) Insertar sus datos\nINSERT INTO campanas VALUES\n    (1, 'Redes Sociales', 'Digital', 4500),\n    (2, 'Google Ads', 'Digital', 6000),\n    (3, 'Referido', 'Directo', 1200),\n    (4, 'Email', 'Digital', 800),\n    (5, 'Ninguna', 'Sin campaña', 0);\n\n-- 3) Agregar la llave foránea (FK) en la tabla envios\nALTER TABLE envios ADD COLUMN id_campana INTEGER REFERENCES campanas(id_campana);\n\n-- 4) Rellenar la FK: buscamos cada valor por nombre\nUPDATE envios\nSET id_campana = (SELECT campanas.id_campana FROM campanas\n            WHERE campanas.nombre_campana = envios.campana_mercadeo);\n\n-- 5) ¡Listo! Ahora probá el JOIN (monto cobrado por tipo de canal):\nSELECT c.tipo_canal, COUNT(*) AS envios, ROUND(SUM(e.monto_cobrado),2) AS monto_total\nFROM envios e\nJOIN campanas c ON e.id_campana = c.id_campana\nGROUP BY c.tipo_canal\nORDER BY monto_total DESC;\n"}, {"table": "rutas", "title": "rutas", "desc": "Kilómetros y región de cada ruta → JOIN con envios", "sql": "-- ============================================================\n-- PASO A PASO: crear la tabla \"rutas\" y conectarla con \"envios\"\n-- Catálogo de rutas de entrega con su distancia.\n-- Presioná Ejecutar y mirá cómo aparece en el Diagrama ER.\n-- ============================================================\n\n-- 1) Crear la tabla nueva (la \"dimensión\")\nCREATE TABLE rutas (\n    id_ruta          INTEGER PRIMARY KEY,\n    nombre_ruta      VARCHAR(20) NOT NULL,\n    kilometros       INTEGER NOT NULL,\n    region_principal VARCHAR(30)\n);\n\n-- 2) Insertar sus datos\nINSERT INTO rutas VALUES\n    (1, 'Centro', 45, 'Guatemala'),\n    (2, 'Occidente', 210, 'Quetzaltenango'),\n    (3, 'Sur', 60, 'Escuintla'),\n    (4, 'Norte', 220, 'Alta Verapaz'),\n    (5, 'Oriente', 300, 'Izabal');\n\n-- 3) Agregar la llave foránea (FK) en la tabla envios\nALTER TABLE envios ADD COLUMN id_ruta INTEGER REFERENCES rutas(id_ruta);\n\n-- 4) Rellenar la FK: buscamos cada valor por nombre\nUPDATE envios\nSET id_ruta = (SELECT rutas.id_ruta FROM rutas\n            WHERE rutas.nombre_ruta = envios.ruta);\n\n-- 5) ¡Listo! Ahora probá el JOIN (tiempo de entrega promedio por ruta):\nSELECT r.nombre_ruta, r.kilometros, COUNT(*) AS envios,\n       ROUND(AVG(e.tiempo_entrega_horas),1) AS horas_promedio\nFROM envios e\nJOIN rutas r ON e.id_ruta = r.id_ruta\nGROUP BY r.nombre_ruta, r.kilometros\nORDER BY r.kilometros;\n"}], "inmobiliaria": [{"table": "asesores", "title": "asesores", "desc": "Oficina y antigüedad de cada asesor → JOIN con ventas", "sql": "-- ============================================================\n-- PASO A PASO: crear la tabla \"asesores\" y conectarla con \"ventas_inmobiliarias\"\n-- Equipo de asesores de Prisma Inmobiliaria.\n-- Presioná Ejecutar y mirá cómo aparece en el Diagrama ER.\n-- ============================================================\n\n-- 1) Crear la tabla nueva (la \"dimensión\")\nCREATE TABLE asesores (\n    id_asesor        INTEGER PRIMARY KEY,\n    nombre_asesor    VARCHAR(40) NOT NULL,\n    oficina          VARCHAR(30) NOT NULL,\n    antiguedad_meses INTEGER\n);\n\n-- 2) Insertar sus datos\nINSERT INTO asesores VALUES\n    (1, 'Rodrigo Barrios', 'Zona 10', 48),\n    (2, 'Ana Lucía Morán', 'Zona 10', 36),\n    (3, 'José Pablo Cifuentes', 'Zona 4', 24),\n    (4, 'Melissa Ortiz', 'Zona 4', 18),\n    (5, 'Sergio Aguilar', 'Mixco', 30),\n    (6, 'Ingrid Castillo', 'Mixco', 12);\n\n-- 3) Agregar la llave foránea (FK) en la tabla ventas_inmobiliarias\nALTER TABLE ventas_inmobiliarias ADD COLUMN id_asesor INTEGER REFERENCES asesores(id_asesor);\n\n-- 4) Rellenar la FK: buscamos cada valor por nombre\nUPDATE ventas_inmobiliarias\nSET id_asesor = (SELECT asesores.id_asesor FROM asesores\n            WHERE asesores.nombre_asesor = ventas_inmobiliarias.asesor);\n\n-- 5) ¡Listo! Ahora probá el JOIN (ventas vendidas por oficina):\nSELECT a.oficina, COUNT(*) AS ventas, ROUND(SUM(v.precio_venta),2) AS total_vendido\nFROM ventas_inmobiliarias v\nJOIN asesores a ON v.id_asesor = a.id_asesor\nWHERE v.estado_venta = 'Vendida'\nGROUP BY a.oficina\nORDER BY total_vendido DESC;\n"}, {"table": "zonas", "title": "zonas", "desc": "Categoría de precio y municipio de cada zona → JOIN con ventas", "sql": "-- ============================================================\n-- PASO A PASO: crear la tabla \"zonas\" y conectarla con \"ventas_inmobiliarias\"\n-- Catálogo de zonas donde se venden propiedades.\n-- Presioná Ejecutar y mirá cómo aparece en el Diagrama ER.\n-- ============================================================\n\n-- 1) Crear la tabla nueva (la \"dimensión\")\nCREATE TABLE zonas (\n    id_zona          INTEGER PRIMARY KEY,\n    nombre_zona      VARCHAR(30) NOT NULL,\n    categoria_precio VARCHAR(15) NOT NULL,\n    municipio        VARCHAR(30)\n);\n\n-- 2) Insertar sus datos\nINSERT INTO zonas VALUES\n    (1, 'Zona 1', 'Media', 'Guatemala'),\n    (2, 'Zona 4', 'Media', 'Guatemala'),\n    (3, 'Zona 10', 'Premium', 'Guatemala'),\n    (4, 'Zona 14', 'Premium', 'Guatemala'),\n    (5, 'Zona 16', 'Premium', 'Guatemala'),\n    (6, 'Mixco', 'Emergente', 'Mixco'),\n    (7, 'Carretera a El Salvador', 'Emergente', 'Santa Catarina Pinula'),\n    (8, 'Santa Catarina Pinula', 'Media', 'Santa Catarina Pinula');\n\n-- 3) Agregar la llave foránea (FK) en la tabla ventas_inmobiliarias\nALTER TABLE ventas_inmobiliarias ADD COLUMN id_zona INTEGER REFERENCES zonas(id_zona);\n\n-- 4) Rellenar la FK: buscamos cada valor por nombre\nUPDATE ventas_inmobiliarias\nSET id_zona = (SELECT zonas.id_zona FROM zonas\n            WHERE zonas.nombre_zona = ventas_inmobiliarias.zona);\n\n-- 5) ¡Listo! Ahora probá el JOIN (precio promedio por categoría de zona):\nSELECT z.categoria_precio, COUNT(*) AS ventas, ROUND(AVG(v.precio_venta),2) AS precio_promedio\nFROM ventas_inmobiliarias v\nJOIN zonas z ON v.id_zona = z.id_zona\nGROUP BY z.categoria_precio\nORDER BY precio_promedio DESC;\n"}], "banco": [{"table": "agencias", "title": "agencias", "desc": "Departamento y tipo de cada agencia → JOIN con transacciones", "sql": "-- ============================================================\n-- PASO A PASO: crear la tabla \"agencias\" y conectarla con \"transacciones_bancarias\"\n-- Catálogo de agencias de Banco Andino GT.\n-- Presioná Ejecutar y mirá cómo aparece en el Diagrama ER.\n-- ============================================================\n\n-- 1) Crear la tabla nueva (la \"dimensión\")\nCREATE TABLE agencias (\n    id_agencia     INTEGER PRIMARY KEY,\n    nombre_agencia VARCHAR(30) NOT NULL,\n    departamento   VARCHAR(30) NOT NULL,\n    tipo_agencia   VARCHAR(20)\n);\n\n-- 2) Insertar sus datos\nINSERT INTO agencias VALUES\n    (1, 'Zona 9 Central', 'Guatemala', 'Principal'),\n    (2, 'Zona 10 Financiera', 'Guatemala', 'Principal'),\n    (3, 'Quetzaltenango', 'Quetzaltenango', 'Regional'),\n    (4, 'Escuintla', 'Escuintla', 'Regional'),\n    (5, 'Cobán', 'Alta Verapaz', 'Regional'),\n    (6, 'Mixco Plaza', 'Guatemala', 'Centro comercial'),\n    (7, 'Chiquimula', 'Chiquimula', 'Regional');\n\n-- 3) Agregar la llave foránea (FK) en la tabla transacciones_bancarias\nALTER TABLE transacciones_bancarias ADD COLUMN id_agencia INTEGER REFERENCES agencias(id_agencia);\n\n-- 4) Rellenar la FK: buscamos cada valor por nombre\nUPDATE transacciones_bancarias\nSET id_agencia = (SELECT agencias.id_agencia FROM agencias\n            WHERE agencias.nombre_agencia = transacciones_bancarias.agencia);\n\n-- 5) ¡Listo! Ahora probá el JOIN (monto total por departamento):\nSELECT a.departamento, COUNT(*) AS transacciones, ROUND(SUM(t.monto),2) AS monto_total\nFROM transacciones_bancarias t\nJOIN agencias a ON t.id_agencia = a.id_agencia\nGROUP BY a.departamento\nORDER BY monto_total DESC;\n"}, {"table": "oficiales", "title": "oficiales", "desc": "Cargo y antigüedad de cada oficial → JOIN con transacciones", "sql": "-- ============================================================\n-- PASO A PASO: crear la tabla \"oficiales\" y conectarla con \"transacciones_bancarias\"\n-- Equipo de oficiales que atienden las transacciones.\n-- Presioná Ejecutar y mirá cómo aparece en el Diagrama ER.\n-- ============================================================\n\n-- 1) Crear la tabla nueva (la \"dimensión\")\nCREATE TABLE oficiales (\n    id_oficial       INTEGER PRIMARY KEY,\n    nombre_oficial   VARCHAR(40) NOT NULL,\n    cargo            VARCHAR(30) NOT NULL,\n    antiguedad_meses INTEGER\n);\n\n-- 2) Insertar sus datos\nINSERT INTO oficiales VALUES\n    (1, 'Gabriela Solís', 'Supervisora', 60),\n    (2, 'Marco Tulio Reyes', 'Oficial Senior', 48),\n    (3, 'Andrea Palma', 'Oficial Senior', 36),\n    (4, 'Kevin Estrada', 'Oficial Junior', 12),\n    (5, 'Lourdes Fuentes', 'Oficial Junior', 18),\n    (6, 'Byron Hernández', 'Oficial Junior', 8);\n\n-- 3) Agregar la llave foránea (FK) en la tabla transacciones_bancarias\nALTER TABLE transacciones_bancarias ADD COLUMN id_oficial INTEGER REFERENCES oficiales(id_oficial);\n\n-- 4) Rellenar la FK: buscamos cada valor por nombre\nUPDATE transacciones_bancarias\nSET id_oficial = (SELECT oficiales.id_oficial FROM oficiales\n            WHERE oficiales.nombre_oficial = transacciones_bancarias.oficial_asignado);\n\n-- 5) ¡Listo! Ahora probá el JOIN (transacciones completadas por cargo):\nSELECT o.cargo, COUNT(*) AS completadas, ROUND(SUM(t.monto),2) AS monto_total\nFROM transacciones_bancarias t\nJOIN oficiales o ON t.id_oficial = o.id_oficial\nWHERE t.estado = 'Completada'\nGROUP BY o.cargo\nORDER BY completadas DESC;\n"}]};
+const JOIN_CASE_LABELS = { envios:"TransLogic GT", inmobiliaria:"Prisma Inmobiliaria", banco:"Banco Andino GT" };
+function getJoinScripts() {
+  if (activeQuestionCase === "all") {
+    return Object.keys(JOIN_SCRIPTS).flatMap(k => JOIN_SCRIPTS[k].map(s => ({ ...s, caseLabel: JOIN_CASE_LABELS[k] })));
+  }
+  return (JOIN_SCRIPTS[activeQuestionCase] || []).map(s => ({ ...s, caseLabel: JOIN_CASE_LABELS[activeQuestionCase] }));
+}
+let lastKnownTables = null;
+function renderJoinScripts(existingTables) {
+  if (existingTables) lastKnownTables = existingTables;
+  const box = document.getElementById("join-tools");
+  const list = document.getElementById("join-scripts-list");
+  const scripts = getJoinScripts();
+  list.innerHTML = "";
+  if (!scripts.length) { box.style.display = "none"; return; }
+  box.style.display = "block";
+  const have = new Set(lastKnownTables || []);
+  scripts.forEach(s => {
+    const done = have.has(s.table);
+    const b = document.createElement("button");
+    b.className = "join-btn" + (done ? " done" : "");
+    b.innerHTML = `<span class="jt">+ ${s.title}</span><span class="jd">${s.desc}</span><span class="jc">${done ? "✓ ya creada" : s.caseLabel}</span>`;
+    b.addEventListener("click", () => {
+      queryEl.value = s.sql;
+      setStatus("script cargado · revisalo y presioná Ejecutar", "ok");
+      const w = document.querySelector(".editor-wrap");
+      w.classList.remove("flash"); void w.offsetWidth; w.classList.add("flash");
+      if (window.innerWidth <= 980) w.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+    list.appendChild(b);
+  });
+}
+
 function renderQuestionList() {
+  renderJoinScripts();
   const labelEl = document.getElementById("questions-current-label");
   const listEl = document.getElementById("questions-list");
   const set = QUESTION_SETS[activeQuestionCase];
@@ -1564,7 +1644,8 @@ function friendlyError(rawMessage) {
   const rules = [
     [/no such table:\s*(\S+)/i, (g) => `La tabla "${g[1]}" no existe todavía. Revisá que esté bien escrito el nombre, o cargá el caso correspondiente en "Cargar caso", arriba.`],
     [/no such column:\s*(\S+)/i, (g) => `La columna "${g[1]}" no existe en esa tabla. Mirá el diagrama ER o usá "Ver primeras filas" en la pestaña Datos para ver qué columnas tiene.`],
-    [/table\s+(\S+)\s+already exists/i, (g) => `La tabla "${g[1]}" ya existe. Si querés reemplazarla, agregá antes la línea: DROP TABLE IF EXISTS ${g[1]};`],
+    [/table\s+(\S+)\s+already exists/i, (g) => `La tabla "${g[1]}" ya existe (probablemente ya ejecutaste ese script). Para repetirlo desde cero, volvé a presionar tu caso en "Cargar caso"; o agregá antes la línea: DROP TABLE IF EXISTS ${g[1]};`],
+    [/duplicate column name:\s*(\S+)/i, (g) => `La columna "${g[1]}" ya fue agregada antes. Recargá el caso en "Cargar caso" para empezar de nuevo.`],
     [/UNIQUE constraint failed:\s*(\S+)/i, (g) => `Ya existe una fila con ese mismo valor único (columna ${g[1]}) — probablemente estás repitiendo una llave primaria. Probá con otro id.`],
     [/FOREIGN KEY constraint failed/i, () => `Esa fila hace referencia a un id que no existe en la otra tabla. Revisá que el valor de la llave foránea exista como llave primaria allá.`],
     [/near ".*?":\s*syntax error/i, () => `Hay un error de sintaxis cerca de esa parte de la consulta. Revisá comas, paréntesis y que termine en punto y coma ( ; ).`],
@@ -1638,6 +1719,7 @@ function refreshDiagram() {
   const tableNames = q("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name;").map(r => r[0]);
 
   populateTablePicker(tableNames);
+  renderJoinScripts(tableNames);
 
   if (!tableNames.length) {
     erdEmpty.style.display = "block";
@@ -1770,19 +1852,19 @@ function setActiveCaseButton(activeId) {
 }
 
 document.getElementById("btn-load-envios").addEventListener("click", () => {
-  queryEl.value = "-- Caso cargado: envios, agentes, clientes (TransLogic GT)\n-- Probá crear una tabla nueva, por ejemplo \"sucursales\", y conectala con una llave foránea.";
+  queryEl.value = "-- Caso cargado: envios, agentes, clientes (TransLogic GT)\n-- Probá crear una tabla nueva, por ejemplo \"sucursales\", y conectala con una llave foránea.\n-- Tip: en \"Tablas extra para practicar JOIN\" (pestaña Diagrama ER) hay scripts listos: campanas y rutas.";
   activeQuestionCase = "envios"; renderQuestionList();
   setActiveCaseButton("btn-load-envios");
   loadPreset(CASE_ENVIOS);
 });
 document.getElementById("btn-load-inmo").addEventListener("click", () => {
-  queryEl.value = "-- Caso cargado: ventas_inmobiliarias (Prisma Inmobiliaria)\n-- No tiene tablas relacionadas todavía -- probá crear \"asesores\" y conectarla.";
+  queryEl.value = "-- Caso cargado: ventas_inmobiliarias (Prisma Inmobiliaria)\n-- No tiene tablas relacionadas todavía -- probá crear \"asesores\" y conectarla.\n-- Tip: en \"Tablas extra para practicar JOIN\" (pestaña Diagrama ER) hay scripts listos: asesores y zonas.";
   activeQuestionCase = "inmobiliaria"; renderQuestionList();
   setActiveCaseButton("btn-load-inmo");
   loadPreset(CASE_INMOBILIARIA);
 });
 document.getElementById("btn-load-banco").addEventListener("click", () => {
-  queryEl.value = "-- Caso cargado: transacciones_bancarias (Banco Andino GT)\n-- No tiene tablas relacionadas todavía -- probá crear \"agencias\" y conectarla.";
+  queryEl.value = "-- Caso cargado: transacciones_bancarias (Banco Andino GT)\n-- No tiene tablas relacionadas todavía -- probá crear \"agencias\" y conectarla.\n-- Tip: en \"Tablas extra para practicar JOIN\" (pestaña Diagrama ER) hay scripts listos: agencias y oficiales.";
   activeQuestionCase = "banco"; renderQuestionList();
   setActiveCaseButton("btn-load-banco");
   loadPreset(CASE_BANCO);
@@ -1808,6 +1890,99 @@ queryEl.value = "-- Caso cargado: envios, agentes, clientes (TransLogic GT)\n-- 
 renderQuestionList();
 setActiveCaseButton("btn-load-envios");
 loadPreset(CASE_ENVIOS);
+
+/* ===== Guía interactiva (manita) ===== */
+const TOUR_STEPS = [
+  { sel: "#case-bar", title: "Elegí un caso", text: "Cada caso es una empresa ficticia con su base de datos ya cargada.", act: "👉 Hacé clic en cualquiera, por ejemplo TransLogic GT", on: ["click", ".toolbar .chip-btn.primary"] },
+  { sel: "#erd-wrap", title: "El diagrama ER", text: "Cada caja es una tabla. Las flechas muestran cómo se relacionan (1 → N). Se redibuja solo cada vez que cambiás algo.", next: true },
+  { sel: "#join-tools", title: "Tablas extra para JOIN", text: "Con estos botones creás tablas nuevas y las conectás con la tabla principal. Así practicás JOIN.", act: "👉 Tocá una, por ejemplo la primera", on: ["click", ".join-btn"], optional: true },
+  { sel: ".editor-wrap", title: "La consola negra", text: "Acá aparece el script. No se ejecuta solo: leelo con calma, tiene 5 pasos comentados con --.", next: true },
+  { sel: "#run-btn", title: "Ejecutá el script", text: "Esto crea la tabla, la conecta y hace un JOIN de ejemplo. También funciona Ctrl + Enter.", act: "👉 Presioná Ejecutar", on: ["click", "#run-btn"] },
+  { sel: "#result-panel", title: "El resultado", text: "Acá ves lo que devolvió la consulta. Si hay muchas columnas, deslizá hacia la derecha. Y mirá el diagrama: ya tiene la tabla nueva.", next: true, wait: 500 },
+  { sel: "#tab-data", title: "Ahora, a practicar preguntas", text: "En la pestaña Datos hay preguntas listas para cada caso.", act: "👉 Hacé clic en Datos", on: ["click", "#tab-data"] },
+  { sel: "#questions-list", title: "Preguntas con un clic", text: "Tocá una pregunta: la consulta se escribe sola en la consola. Después presioná Ejecutar y comparás con lo que esperabas.", next: true, wait: 300 },
+  { sel: null, title: "¡Listo, ya sabés moverte!", text: "Cuando quieras repasar, usá el botón «Guía interactiva» de arriba. Ahora probá tus propias consultas.", next: true, last: true },
+];
+let tourIdx = -1, tourTimer = null, tourCleanup = null;
+const tourEls = {};
+function tourBuild() {
+  if (tourEls.spot) return;
+  tourEls.spot = document.createElement("div"); tourEls.spot.id = "tour-spot";
+  tourEls.hand = document.createElement("div"); tourEls.hand.id = "tour-hand"; tourEls.hand.textContent = "👆";
+  tourEls.card = document.createElement("div"); tourEls.card.id = "tour-card";
+  [tourEls.spot, tourEls.hand, tourEls.card].forEach(e => document.body.appendChild(e));
+}
+function tourStop() {
+  tourIdx = -1;
+  if (tourCleanup) { tourCleanup(); tourCleanup = null; }
+  clearInterval(tourTimer);
+  ["spot","hand","card"].forEach(k => { if (tourEls[k]) { tourEls[k].remove(); delete tourEls[k]; } });
+  try { localStorage.setItem("amz_tour_done", "1"); } catch (e) {}
+}
+function tourStart() { tourBuild(); tourGo(0); clearInterval(tourTimer); tourTimer = setInterval(tourPlace, 250); }
+function tourVisible(el) { return el && el.offsetParent !== null && el.getBoundingClientRect().width > 0; }
+function tourGo(i) {
+  if (tourCleanup) { tourCleanup(); tourCleanup = null; }
+  while (i < TOUR_STEPS.length && TOUR_STEPS[i].sel && TOUR_STEPS[i].optional && !tourVisible(document.querySelector(TOUR_STEPS[i].sel))) i++;
+  if (i >= TOUR_STEPS.length) return tourStop();
+  tourIdx = i;
+  const s = TOUR_STEPS[i];
+  // asegurar la pestaña correcta
+  if (s.sel === "#erd-wrap" || s.sel === "#join-tools" || s.sel === "#tab-data" && false) switchView("diagram");
+  if (s.sel === "#questions-list") switchView("data");
+  if (s.sel === ".editor-wrap" || s.sel === "#run-btn" || s.sel === "#result-panel") { if (document.getElementById("view-info").style.display !== "none") switchView("diagram"); }
+  const dots = TOUR_STEPS.map((_, k) => `<i class="${k <= i ? "on" : ""}"></i>`).join("");
+  tourEls.card.innerHTML = `<div id="tour-dots">${dots}</div><div class="tc-step">Paso ${i + 1} de ${TOUR_STEPS.length}</div><div class="tc-title">${s.title}</div><p class="tc-text">${s.text}</p>` +
+    (s.act ? `<div class="tc-act">${s.act}</div>` : "") +
+    `<div class="tc-row"><button class="tc-skip">${s.last ? "Cerrar" : "Saltar guía"}</button><button class="tc-next">${s.last ? "Terminar ✓" : (s.on ? "Omitir paso →" : "Siguiente →")}</button></div>`;
+  tourEls.card.querySelector(".tc-skip").onclick = tourStop;
+  tourEls.card.querySelector(".tc-next").onclick = () => s.last ? tourStop() : tourGo(i + 1);
+  if (s.on) {
+    const [evt, selector] = s.on;
+    const handler = (e) => { if (e.target.closest(selector)) { document.removeEventListener(evt, handler, true); tourCleanup = null; setTimeout(() => tourGo(i + 1), 700); } };
+    document.addEventListener(evt, handler, true);
+    tourCleanup = () => document.removeEventListener(evt, handler, true);
+  }
+  const el = s.sel ? document.querySelector(s.sel) : null;
+  if (el) { const r = el.getBoundingClientRect(); const fits = r.height < innerHeight * 0.8; el.scrollIntoView({ block: fits ? "center" : "start", behavior: "auto" }); }
+  setTimeout(tourPlace, s.wait || 30);
+}
+function tourPlace() {
+  if (tourIdx < 0 || !tourEls.card) return;
+  const s = TOUR_STEPS[tourIdx];
+  const el = s.sel ? document.querySelector(s.sel) : null;
+  const card = tourEls.card, spot = tourEls.spot, hand = tourEls.hand;
+  const cw = card.offsetWidth, ch = card.offsetHeight, vw = innerWidth, vh = innerHeight;
+  if (!el || !tourVisible(el)) {
+    spot.style.cssText = "left:50%;top:50%;width:0;height:0;";
+    hand.style.display = "none";
+    card.style.left = Math.max(12, (vw - cw) / 2) + "px"; card.style.top = Math.max(12, (vh - ch) / 2) + "px";
+    return;
+  }
+  const r = el.getBoundingClientRect();
+  const x1 = Math.max(r.left, 0) - 6, y1 = Math.max(r.top, 0) - 6, x2 = Math.min(r.right, vw) + 6, y2 = Math.min(r.bottom, vh) + 6;
+  spot.style.left = x1 + "px"; spot.style.top = y1 + "px"; spot.style.width = (x2 - x1) + "px"; spot.style.height = (y2 - y1) + "px";
+  hand.style.display = "block";
+  const below = vh - y2, above = y1;
+  let cx, cy, hx, hy, glyph;
+  if (below >= ch + 70) { glyph = "👆"; hx = Math.min(Math.max(x1 + 24, 8), vw - 50); hy = y2 + 2; cy = y2 + 46; }
+  else if (above >= ch + 70) { glyph = "👇"; hx = Math.min(Math.max(x1 + 24, 8), vw - 50); hy = y1 - 46; cy = y1 - 52 - ch; }
+  else {
+    glyph = "👆"; hx = Math.min(Math.max(x1 + 30, 8), vw - 50); hy = Math.max(y1 + 12, 8);
+    cy = (x1 + (x2 - x1) / 2 < vw / 2 ? vh - ch - 16 : Math.max(16, vh - ch - 16));
+    // tarjeta en el lado opuesto de la zona resaltada si sobra espacio horizontal
+  }
+  cx = Math.min(Math.max(x1, 12), vw - cw - 12);
+  if (glyph === "👆" && below < ch + 70) { cx = (x1 + x2) / 2 < vw / 2 ? vw - cw - 16 : 16; }
+  hand.textContent = glyph;
+  hand.style.left = hx + "px"; hand.style.top = hy + "px";
+  card.style.left = cx + "px"; card.style.top = Math.max(8, Math.min(cy, vh - ch - 8)) + "px";
+}
+window.addEventListener("resize", tourPlace);
+window.addEventListener("scroll", tourPlace, true);
+document.getElementById("btn-tour").addEventListener("click", () => { if (tourIdx >= 0) tourStop(); tourStart(); });
+document.getElementById("btn-tour-2").addEventListener("click", () => { if (tourIdx >= 0) tourStop(); tourStart(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && tourIdx >= 0) tourStop(); });
 </script>
 </body>
 </html>
